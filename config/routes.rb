@@ -1,7 +1,14 @@
 LoginBlog::Application.routes.draw do
+  devise_for :users, path_names: { sign_in: "login", sign_out: "logout" }
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  resources :posts do
+  end
 
+
+  match '/' => 'posts#index'
+  match '/post/new' => 'posts#new'
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
@@ -48,7 +55,7 @@ LoginBlog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  root :to => 'posts#index'
 
   # See how all your routes lay out with "rake routes"
 

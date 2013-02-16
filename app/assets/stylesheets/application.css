@@ -11,3 +11,19 @@
  *= require_self
  *= require_tree .
  */
+
+#all_posts {
+	text-align: center;
+}
+
+#show_post {
+	text-align: center;
+}
+
+#new_post_btn {
+	text-align: center;
+}
+
+#user_nav {
+	text-align: right;
+}
