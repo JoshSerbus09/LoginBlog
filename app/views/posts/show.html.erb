@@ -6,6 +6,7 @@
 	<p>Submitted By: <%= User.find(@post.uid).username.humanize %></p>
 	<br />
 
-	<%= link_to 'Edit', edit_post_path(@post) %> | <%= link_to 'Delete', :method => :delete, :confirm => 'Are you sure?' %> | <%= link_to 'Back to Posts', posts_path %>
-
+	<% unless current_user && current_user.id == @post.uid %>
+		<%= link_to 'Edit', edit_post_path(@post) %> | <%= link_to 'Delete', :method => :delete, :confirm => 'Are you sure?' %> | <%= link_to 'Back to Posts', posts_path %>
+	<% end %>
 </div>
