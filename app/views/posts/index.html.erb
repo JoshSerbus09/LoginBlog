@@ -5,7 +5,7 @@
 			<h1><%= link_to post.title.humanize, post %></h1>
 				<%= post.message %>
 				<br />
-				Submitted By:  <%= User.find(post.uid).username %>
+				Submitted By:  <%= User.find(post.uid).username.humanize %>
 				<br />
 				<br />
 				<% if current_user && current_user.id == post.uid %> 
