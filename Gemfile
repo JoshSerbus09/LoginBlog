@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'ruby'
 gem 'rails', '3.2.8'
-gem 'ruby', '1.9.3'
 gem 'heroku'
+gem 'devise'
 
 
 # Bundle edge Rails instead:
@@ -10,6 +11,7 @@ gem 'heroku'
 
 group :production do
 	gem 'pg'
+end
 group :development, :test do	
 	gem 'sqlite3'
 end
@@ -43,4 +45,3 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-gem 'devise'

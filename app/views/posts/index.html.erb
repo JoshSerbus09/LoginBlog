@@ -8,7 +8,9 @@
 				Submitted By:  <%= User.find(post.uid).username %>
 				<br />
 				<br />
-			<%= link_to 'Edit', edit_post_path(post) %> | <%= link_to 'Delete', post, method: :delete, :confirm => 'Are you sure?' %>
+				<% if current_user && current_user.id == post.uid %> 
+					<%= link_to 'Edit', edit_post_path(post) %> | <%= link_to 'Delete', post, method: :delete, :confirm => 'Are you sure?' %>
+				<% end %>
 		</div>
 		====================================================================================================
 	<% end %>
