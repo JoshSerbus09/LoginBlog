@@ -4,6 +4,7 @@ gem 'ruby'
 gem 'rails', '3.2.8'
 gem 'heroku'
 gem 'devise'
+gem 'omniauth-facebook', '~> 1.4.1'
 
 
 # Bundle edge Rails instead:
