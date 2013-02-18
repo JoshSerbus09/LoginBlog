@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
 	before_filter :authenticate_user!, except: [:index, :show]
-
 	# GET /posts
 	# GET /posts.json
 	def index
@@ -25,6 +24,7 @@ class PostsController < ApplicationController
   	# GET /posts/new.json
 	def new
 		@post = Post.new
+		@post.uid = current_user.id
 
 		respond_to do |format|
 			format.html
@@ -33,11 +33,19 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-		@post = Post.find(params[:id])
+		if current_user.id == Post.find(params[:id]).uid
+			@post = Post.find(params[:id])
+		else
+			respond_to do |format|
+				format.html { redirect_to posts_url, notice: 'You may only edit your own posts'}
+				format.json { render json: @post.error, stats: :unprocessable_entity }
+			end
+		end	
 	end
 
 	def create 
 		@post = Post.new(params[:post])
+		@post.uid = current_user.id
 
 		respond_to do |format|
 			if @post.save
@@ -65,12 +73,24 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
-		@post = Post.find(params[:id])
-		@post.destroy
+		if current_user.id == Post.find(params[:id]).uid
+			@post = Post.find(params[:id])
+			@post.destroy
 
-		respond_to do |format|
-			format.html { redirect_to posts_url }
-			format.json { head :no_content }
+			respond_to do |format|
+				format.html { redirect_to posts_url }
+				format.json { head :no_content }
+			end
+		else 
+			respond_to do |format|
+				format.html { redirect_to posts_url, notice: 'You may only delete your own posts'}
+				format.json { render json: @post.error, stats: :unprocessable_entity }
+			end	
 		end
 	end	
+
+	def username
+		@post = Post.find(params[:id])
+		@post.user.username
+	end
 end

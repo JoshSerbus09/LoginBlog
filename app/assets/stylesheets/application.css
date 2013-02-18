@@ -27,3 +27,13 @@
 #user_nav {
 	text-align: right;
 }
+
+.notice {
+	background-color: red;
+	color: black;
+}
+
+.alert {
+	background-color: red;
+	color: black;
+}

@@ -1,14 +1,16 @@
 <div id="all_posts">
+		====================================================================================================
 	<% @posts.reverse.each do |post| %>
 		<div id="indiv_post">
 			<h1><%= link_to post.title.humanize, post %></h1>
 				<%= post.message %>
 				<br />
-				Submitted By: <%= post.name %>
+				Submitted By:  <%= User.find(post.uid).username %>
 				<br />
 				<br />
 			<%= link_to 'Edit', edit_post_path(post) %> | <%= link_to 'Delete', post, method: :delete, :confirm => 'Are you sure?' %>
 		</div>
+		====================================================================================================
 	<% end %>
 </div>	
 <br />
